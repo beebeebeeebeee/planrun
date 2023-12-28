@@ -40,7 +40,7 @@ export function _MainLayout(props: MainLayoutProps): JSX.Element {
         </Toolbar>
       </AppBar>
       {sideMenu}
-      <Container maxWidth="sm" sx={{ pt: 1 }}>
+      <Container maxWidth="sm" sx={{ py: 1 }}>
         {children}
       </Container>
     </Box>
