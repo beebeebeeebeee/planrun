@@ -63,11 +63,7 @@ export function RecordDialog(props: CreateRecordDialogProps): JSX.Element {
 
   const handleChange = useCallback(
     ({ target }: ChangeEvent<{ name: keyof RunRecord; value: any }>) => {
-      let { value } = target;
-      if (target.name === "distance") {
-        value = Number.isNaN(parseFloat(value)) ? "" : parseFloat(value);
-      }
-      setForm((f) => f.withUpdate({ name: target.name, value }));
+      setForm((f) => f.withUpdate(target));
     },
     []
   );
@@ -80,7 +76,12 @@ export function RecordDialog(props: CreateRecordDialogProps): JSX.Element {
   }, []);
 
   const onSubmit = useCallback(() => {
-    _onSubmit(form);
+    _onSubmit(
+      form.withUpdate({
+        name: "distance",
+        value: parseFloat(form.distance as any),
+      })
+    );
     setTimeout(() => {
       setForm(InitForm(date));
     }, 0);
@@ -193,7 +194,6 @@ export function CreateRecordDialogProvider(
       setDate(payload);
       setRecord(InitForm(payload));
     } else if (payload instanceof RunRecord) {
-      setDate(undefined);
       setRecord(payload);
     } else {
       setDate(undefined);
