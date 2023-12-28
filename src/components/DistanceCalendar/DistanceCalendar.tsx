@@ -20,6 +20,8 @@ export function DistanceCalendar(props: DistanceCalendarProps): JSX.Element {
       locale={DefaultLanguage}
       onChange={onViewDateChange}
       value={viewDate}
+      prev2Label={null}
+      next2Label={null}
       tileContent={(t: TileArgs): JSX.Element | undefined => {
         const r = tileDistance(t.date);
 

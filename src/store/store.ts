@@ -55,7 +55,6 @@ export class Store {
 
         const data = JSON.parse(content.toString());
         this.set(data);
-        window.location.reload();
       };
       reader.readAsText(file);
     };
