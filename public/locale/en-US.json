@@ -1,0 +1,44 @@
+{
+    "validation": {
+        "required": "Required",
+        "isNumber": "Must be a number"
+    },
+    "layouts": {
+        "main": {
+            "title": "PLANRUN",
+            "backup": "Backup",
+            "save": "Save",
+            "restore": "Restore"
+        }
+    },
+    "pages": {
+        "planner": {
+            "week": "Week {{week}}",
+            "noRecords": "No records",
+            "addRecord": "Add record",
+            "createDialog": {
+                "header": "Plan A Run",
+                "title": "Title",
+                "description": "Description",
+                "distance": "Distance (km)",
+                "cancel": "Cancel",
+                "remove": "Remove",
+                "save": "Save"
+            }
+        }
+    },
+    "unit": {
+        "distance": {
+            "km": "{{distance}} km"
+        },
+        "weekday": {
+            "0": "Sun",
+            "1": "Mon",
+            "2": "Tue",
+            "3": "Wed",
+            "4": "Thu",
+            "5": "Fri",
+            "6": "Sat"
+        }
+    }
+}

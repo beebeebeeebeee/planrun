@@ -1,0 +1,44 @@
+{
+    "validation": {
+        "required": "必填",
+        "isNumber": "必須是數字"
+    },
+    "layouts": {
+        "main": {
+            "title": "PLANRUN",
+            "backup": "備份",
+            "save": "儲存",
+            "restore": "還原"
+        }
+    },
+    "pages": {
+        "planner": {
+            "week": "第{{week}}週",
+            "noRecords": "沒有記錄",
+            "addRecord": "新增記錄",
+            "createDialog": {
+                "header": "計劃訓練",
+                "title": "標題",
+                "description": "描述",
+                "distance": "距離 (公里)",
+                "cancel": "取消",
+                "remove": "刪除",
+                "save": "儲存"
+            }
+        }
+    },
+    "unit": {
+        "distance": {
+            "km": "{{distance}}公里"
+        },
+        "weekday": {
+            "0": "週日",
+            "1": "週一",
+            "2": "週二",
+            "3": "週三",
+            "4": "週四",
+            "5": "週五",
+            "6": "週六"
+        }
+    }
+}
