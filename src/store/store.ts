@@ -36,28 +36,31 @@ export class Store {
     a.remove();
   }
 
-  public import(): void {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "application/json,.txt";
-    input.onchange = () => {
-      const file = input.files?.[0];
-      if (!file) {
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const content = reader.result;
-        if (!content) {
+  public import(): Promise<void> {
+    return new Promise((resolve) => {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "application/json,.txt";
+      input.onchange = () => {
+        const file = input.files?.[0];
+        if (!file) {
           return;
         }
 
-        const data = JSON.parse(content.toString());
-        this.set(data);
+        const reader = new FileReader();
+        reader.onload = () => {
+          const content = reader.result;
+          if (!content) {
+            return;
+          }
+
+          const data = JSON.parse(content.toString());
+          this.set(data);
+          resolve();
+        };
+        reader.readAsText(file);
       };
-      reader.readAsText(file);
-    };
-    input.click();
+      input.click();
+    });
   }
 }

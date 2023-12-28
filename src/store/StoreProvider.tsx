@@ -60,8 +60,10 @@ export function StoreProvider({
     store.export();
   }, []);
 
-  const importRecords = useCallback(() => {
-    store.import();
+  const importRecords = useCallback(async () => {
+    await store.import();
+    const data = store.get();
+    setRecords(data);
   }, []);
 
   useEffect(() => {
