@@ -2,29 +2,28 @@ import "./DistanceCalendar.css";
 
 import Calendar, { TileArgs } from "react-calendar";
 import { Box, Typography } from "@mui/material";
-import { Value } from "react-calendar/dist/cjs/shared/types";
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { CalendarProps } from "react-calendar/src/Calendar";
 import { DefaultLanguage } from "@/i18n";
 
 export type DistanceCalendarProps = {
-  viewDate: Value;
-  onViewDateChange: (value: Value) => void;
   tileDistance: (date: Date) => number;
-};
+} & CalendarProps;
 
-export function DistanceCalendar(props: DistanceCalendarProps): ReactNode {
-  const { onViewDateChange, viewDate, tileDistance } = props;
+export function DistanceCalendar(_props: DistanceCalendarProps): ReactNode {
+  const { tileDistance, ...props } = _props;
+
+  const { t } = useTranslation();
 
   return (
     <Calendar
       calendarType="iso8601"
       locale={DefaultLanguage}
-      onChange={onViewDateChange}
-      value={viewDate}
       prev2Label={null}
       next2Label={null}
-      tileContent={(t: TileArgs): JSX.Element | undefined => {
-        const r = tileDistance(t.date);
+      tileContent={(tile: TileArgs): JSX.Element | undefined => {
+        const r = tileDistance(tile.date);
 
         return (
           <Box sx={{ verticalAlign: "center", mt: 0.3 }}>
@@ -43,15 +42,22 @@ export function DistanceCalendar(props: DistanceCalendarProps): ReactNode {
                     color: theme.palette.secondary.contrastText,
                   })}
                 >
-                  {`${r}k`}
+                  {t("unit.distance.k", { distance: r })}
                 </Typography>
               </Box>
             ) : (
-              <>-</>
+              <Box
+                sx={{
+                  p: "0.2rem",
+                }}
+              >
+                -
+              </Box>
             )}
           </Box>
         );
       }}
+      {...props}
     />
   );
 }

@@ -35,7 +35,8 @@
     },
     "unit": {
         "distance": {
-            "km": "{{distance}} km"
+            "km": "{{distance}} km",
+            "k": "{{distance}}k"
         },
         "weekday": {
             "0": "Sun",

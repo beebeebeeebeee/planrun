@@ -1,5 +1,6 @@
 import {
-  createTheme as createMuiTheme, CssVarsTheme,
+  createTheme as createMuiTheme,
+  CssVarsTheme,
   experimental_extendTheme,
   Theme,
   ThemeOptions,

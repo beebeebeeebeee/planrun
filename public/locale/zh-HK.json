@@ -35,7 +35,8 @@
     },
     "unit": {
         "distance": {
-            "km": "{{distance}}公里"
+            "km": "{{distance}}公里",
+            "k": "{{distance}}k"
         },
         "weekday": {
             "0": "週日",

@@ -1,7 +1,9 @@
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import {
+  Box,
   Button,
   Divider,
+  Grid,
   Paper,
   Stack,
   Table,
@@ -12,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { OnArgs } from "react-calendar/src/shared/types";
 import { DistanceCalendar } from "@/components";
 import { dateUtil } from "@/utils";
 import { useCreateRecordDialog } from "@/pages";
@@ -32,58 +35,113 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
   const { toggleDialog } = useCreateRecordDialog()!;
 
   const [viewDate, onViewDateChange] = useState<Value>(new Date());
+  const [viewMonth, setViewMonth] = useState<Date | undefined>(new Date());
 
-  const startOfWeek = dateUtil.getStartOfWeek(viewDate as Date);
-  const endOfWeek = dateUtil.getEndOfWeek(viewDate as Date);
+  const onActiveStartDateChange = useCallback((onArgs: OnArgs) => {
+    setViewMonth(
+      onArgs.view === "month" ? onArgs.activeStartDate ?? undefined : undefined
+    );
+  }, []);
 
-  const currentDateRecord = records.filter(
-    ({ date }) =>
-      dateUtil.toDateString(date) === dateUtil.toDateString(viewDate as Date)
+  const weekNumberDistanceMap = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(
+          viewMonth !== undefined
+            ? dateUtil.getAllWeekRangeOfAMonth(viewMonth)
+            : {}
+        ).map(([key, value]) => [
+          key,
+          records
+            .filter(({ date }) =>
+              dateUtil.isBetween(
+                new Date(`${date} 00:00:00`),
+                value[0],
+                value[1]
+              )
+            )
+            .reduce((pv, cv) => pv + cv.distance, 0),
+        ])
+      ),
+    [records, viewMonth]
   );
-  const currentDateDistance = currentDateRecord.reduce(
-    (pv, cv) => pv + cv.distance,
-    0
-  );
 
-  const currentWeekDistance = records
-    .filter(({ date }) =>
-      dateUtil.isBetween(new Date(`${date} 00:00:00`), startOfWeek, endOfWeek)
-    )
-    .reduce((pv, cv) => pv + cv.distance, 0);
-
-  const tileDistance = useCallback(
-    (tileDate: Date) =>
-      records
-        .filter(
-          ({ date }) =>
-            dateUtil.toDateString(date) === dateUtil.toDateString(tileDate)
-        )
-        .reduce((pv, cv) => pv + cv.distance, 0),
+  const getRecordsByDate = useCallback(
+    (date: Date) =>
+      records.filter(
+        ({ date: rdate }) =>
+          dateUtil.toDateString(rdate) === dateUtil.toDateString(date)
+      ),
     [records]
+  );
+
+  const getDistanceByDate = useCallback(
+    (date: Date) =>
+      getRecordsByDate(date).reduce((pv, cv) => pv + cv.distance, 0),
+    [getRecordsByDate]
+  );
+
+  const currentDateRecord = useMemo(
+    () => getRecordsByDate(viewDate as Date),
+    [getRecordsByDate, viewDate]
+  );
+
+  const currentDateDistance = useMemo(
+    () => getDistanceByDate(viewDate as Date),
+    [getDistanceByDate, viewDate]
   );
 
   return (
     <Stack spacing={2}>
       <Stack spacing={1}>
-        <Stack direction="row" justifyContent="space-between">
-          <Typography>
-            {t("pages.planner.week", {
-              week: dateUtil.getWeekNumber(startOfWeek),
-            })}
-          </Typography>
-          <Typography>
-            {dateUtil.toDateString(startOfWeek)} -{" "}
-            {dateUtil.toDateString(endOfWeek)}
-          </Typography>
-          <Typography>
-            {t("unit.distance.km", { distance: currentWeekDistance })}
-          </Typography>
+        <Stack direction="row" spacing={0.6}>
+          <DistanceCalendar
+            value={viewDate}
+            onChange={onViewDateChange}
+            tileDistance={getDistanceByDate}
+            onActiveStartDateChange={onActiveStartDateChange}
+          />
+          <Grid
+            container
+            direction="column"
+            justifyContent={"space-evenly"}
+            alignItems={"flex-end"}
+            sx={{
+              width: "4.5%",
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+            }}
+          >
+            <Grid item sx={{ height: "5.6rem", color: "white" }}>
+              {"-"}
+            </Grid>
+            {Object.entries(weekNumberDistanceMap).map(([key, value]) => (
+              <Grid
+                item
+                key={key}
+                sx={{
+                  height: "4.0rem",
+                  textAlign: "center",
+                }}
+              >
+                <Box
+                  sx={(theme) => ({
+                    bgcolor: theme.palette.info.main,
+                    color: theme.palette.info.contrastText,
+                    borderRadius: "0.25rem",
+                    width: "100%",
+                  })}
+                >
+                  <Typography>
+                    {t("unit.distance.k", {
+                      distance: value,
+                    })}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
         </Stack>
-        <DistanceCalendar
-          viewDate={viewDate}
-          onViewDateChange={onViewDateChange}
-          tileDistance={tileDistance}
-        />
         <Divider />
       </Stack>
       <Stack direction="row" justifyContent="space-between">

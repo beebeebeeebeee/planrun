@@ -20,7 +20,6 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
-import { useStore } from "@/store";
 import { RouterPath } from "@/constants";
 
 const Link = styled(RouterLink)`

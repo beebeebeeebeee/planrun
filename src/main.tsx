@@ -15,13 +15,11 @@ const theme = createTheme();
 const cssTheme = createCssTheme();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Experimental_CssVarsProvider theme={cssTheme}>
-        <StoreProvider>
-          <RouterProvider router={router} />
-        </StoreProvider>
-      </Experimental_CssVarsProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <Experimental_CssVarsProvider theme={cssTheme}>
+      <StoreProvider>
+        <RouterProvider router={router} />
+      </StoreProvider>
+    </Experimental_CssVarsProvider>
+  </ThemeProvider>
 );
