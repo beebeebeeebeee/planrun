@@ -24,7 +24,8 @@
     "react-i18next": "^14.0.0",
     "react-material-ui-form-validator": "^3.0.1",
     "react-router-dom": "^6.21.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "vite-plugin-pwa": "^0.17.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
