@@ -38,6 +38,7 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
   const [viewMonth, setViewMonth] = useState<Date | undefined>(new Date());
 
   const onActiveStartDateChange = useCallback((onArgs: OnArgs) => {
+    console.log(onArgs);
     setViewMonth(
       onArgs.view === "month" ? onArgs.activeStartDate ?? undefined : undefined
     );
@@ -81,6 +82,13 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
     [getRecordsByDate]
   );
 
+  const tileDistance = useCallback(
+    (date: Date) => {
+      return viewMonth !== undefined ? getDistanceByDate(date) : 0;
+    },
+    [getDistanceByDate, viewMonth]
+  );
+
   const currentDateRecord = useMemo(
     () => getRecordsByDate(viewDate as Date),
     [getRecordsByDate, viewDate]
@@ -98,7 +106,7 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
           <DistanceCalendar
             value={viewDate}
             onChange={onViewDateChange}
-            tileDistance={getDistanceByDate}
+            tileDistance={tileDistance}
             onActiveStartDateChange={onActiveStartDateChange}
           />
           <Grid
