@@ -17,6 +17,7 @@ import {
 } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { useTranslation } from "react-i18next";
+import { useConfirm } from "material-ui-confirm";
 import { RunRecord } from "@/entity";
 import { dateUtil } from "@/utils";
 
@@ -59,6 +60,7 @@ export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
 
   const { date, record, toggleDialog } = useCreateRecordDialog();
   const { t } = useTranslation();
+  const confirm = useConfirm();
 
   const [form, setForm] = useState<RunRecord>(InitForm(date!));
 
@@ -88,11 +90,29 @@ export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
     }, 0);
   }, [_onSubmit, form, date]);
 
-  const onRemove = useCallback(() => {
-    _onRemove(form.id);
-    setTimeout(() => {
-      setForm(InitForm(date));
-    }, 0);
+  const onRemove = useCallback(async () => {
+    try {
+      await confirm({
+        title: t("pages.planner.createDialog.removeConfirm.title"),
+        description: t("pages.planner.createDialog.removeConfirm.description"),
+        cancellationText: t("pages.planner.createDialog.removeConfirm.cancel"),
+        cancellationButtonProps: {
+          sx: (theme) => ({
+            color: theme.palette.grey[500],
+          }),
+        },
+        confirmationText: t("pages.planner.createDialog.removeConfirm.remove"),
+        confirmationButtonProps: {
+          color: "error",
+        },
+      });
+      _onRemove(form.id);
+      setTimeout(() => {
+        setForm(InitForm(date));
+      }, 0);
+    } catch (_) {
+      return undefined;
+    }
   }, [_onRemove, form, date]);
 
   useEffect(() => {
@@ -147,12 +167,19 @@ export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>
+          <Button
+            onClick={handleCancel}
+            sx={(theme) => ({
+              color: theme.palette.grey[500],
+            })}
+          >
             {t("pages.planner.createDialog.cancel")}
           </Button>
-          <Button onClick={onRemove}>
-            {t("pages.planner.createDialog.remove")}
-          </Button>
+          {record?.id && (
+            <Button onClick={onRemove} color="error">
+              {t("pages.planner.createDialog.remove")}
+            </Button>
+          )}
           <Button type="submit">{t("pages.planner.createDialog.save")}</Button>
         </DialogActions>
       </ValidatorForm>

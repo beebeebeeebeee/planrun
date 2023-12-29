@@ -22,7 +22,13 @@
                 "distance": "距離 (公里)",
                 "cancel": "取消",
                 "remove": "刪除",
-                "save": "儲存"
+                "save": "儲存",
+                "removeConfirm": {
+                    "title": "您確定刪除這條記錄嗎？",
+                    "description": "此動作無法撤銷。",
+                    "cancel": "取消",
+                    "remove": "刪除"
+                }
             }
         },
         "backup": {
@@ -30,7 +36,19 @@
             "count": "共{{count}}筆，{{size}}KB。",
             "export": "匯出",
             "restore": "還原",
-            "clear": "清除"
+            "clear": "清除",
+            "restoreConfirm": {
+                "title": "您確定要還原嗎？",
+                "description": "此動作無法撤銷。",
+                "cancel": "取消",
+                "restore": "還原"
+            },
+            "clearConfirm": {
+                "title": "您確定要清除嗎？",
+                "description": "此動作無法撤銷。",
+                "cancel": "取消",
+                "clear": "清除"
+            }
         }
     },
     "unit": {

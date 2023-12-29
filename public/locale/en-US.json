@@ -22,7 +22,13 @@
                 "distance": "Distance (km)",
                 "cancel": "Cancel",
                 "remove": "Remove",
-                "save": "Save"
+                "save": "Save",
+                "removeConfirm": {
+                    "title": "Are you sure to remove this record?",
+                    "description": "This action cannot be undone.",
+                    "cancel": "Cancel",
+                    "remove": "Remove"
+                }
             }
         },
         "backup": {
@@ -30,7 +36,19 @@
             "count": "{{count}} records, size {{size}}KB.",
             "export": "Export",
             "restore": "Restore",
-            "clear": "Clear"
+            "clear": "Clear",
+            "restoreConfirm": {
+                "title": "Are you sure to restore?",
+                "description": "This action cannot be undone.",
+                "cancel": "Cancel",
+                "restore": "Restore"
+            },
+            "clearConfirm": {
+                "title": "Are you sure to clear?",
+                "description": "This action cannot be undone.",
+                "cancel": "Cancel",
+                "clear": "Clear"
+            }
         }
     },
     "unit": {
