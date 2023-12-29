@@ -7,10 +7,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import DownloadIcon from '@mui/icons-material/Download';
-import UploadIcon from '@mui/icons-material/Upload';
+import DownloadIcon from "@mui/icons-material/Download";
+import UploadIcon from "@mui/icons-material/Upload";
 import {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useMemo,
@@ -20,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { useStore } from "@/store";
 
 type SideMenuContextValue = {
-  sideMenu: JSX.Element;
+  sideMenu: ReactNode;
   toggleDrawer: () => void;
 };
 
@@ -33,7 +34,7 @@ type SideMenuProps = {
   toggleDrawer: () => void;
 };
 
-function SideMenu(props: SideMenuProps): JSX.Element {
+function SideMenu(props: SideMenuProps): ReactNode {
   const { drawer, toggleDrawer } = props;
 
   const { t } = useTranslation();
@@ -76,8 +77,8 @@ function SideMenu(props: SideMenuProps): JSX.Element {
 export function SideMenuProvider({
   children,
 }: {
-  children: JSX.Element | JSX.Element[] | boolean | undefined;
-}): JSX.Element {
+  children: ReactNode;
+}): ReactNode {
   const [drawer, setDrawer] = useState(false);
 
   const toggleDrawer = useCallback(() => {

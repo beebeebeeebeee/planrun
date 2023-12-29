@@ -1,5 +1,6 @@
 import {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -26,8 +27,8 @@ const store = new Store();
 export function StoreProvider({
   children,
 }: {
-  children: JSX.Element | JSX.Element[] | boolean | undefined;
-}): JSX.Element {
+  children: ReactNode;
+}): ReactNode {
   const [records, setRecords] = useState<RunRecord[]>([]);
 
   const addRecord = useCallback((payload: CreateRunRecord) => {

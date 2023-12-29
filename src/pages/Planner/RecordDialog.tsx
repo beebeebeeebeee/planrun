@@ -8,6 +8,7 @@ import {
 import {
   ChangeEvent,
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -24,12 +25,12 @@ export const CreateRecordDialogProviderContext = createContext<
 >(undefined);
 
 export type CreateRecordDialogProviderProps = {
-  children: JSX.Element | JSX.Element[] | boolean | undefined;
+  children: ReactNode;
   onSubmit: (record: RunRecord) => void | Promise<void>;
   onRemove: (id: string) => void | Promise<void>;
 };
 
-export function useCreateRecordDialog() {
+export function useCreateRecordDialog(): CreateRecordDialogProviderContextValue {
   const context = useContext(CreateRecordDialogProviderContext);
   if (context === undefined) {
     throw new Error(
@@ -53,7 +54,7 @@ const InitForm = (date?: Date) =>
     distance: "" as any,
   });
 
-export function RecordDialog(props: CreateRecordDialogProps): JSX.Element {
+export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
   const { open, onSubmit: _onSubmit, onRemove: _onRemove } = props;
 
   const { date, record, toggleDialog } = useCreateRecordDialog();
@@ -167,7 +168,7 @@ export type CreateRecordDialogProviderContextValue = {
 
 export function CreateRecordDialogProvider(
   props: CreateRecordDialogProviderProps
-) {
+): ReactNode {
   const { children, onSubmit: _onSubmit, onRemove: _onRemove } = props;
   const [open, setOpen] = useState<boolean>(false);
   const [date, setDate] = useState<Date>();

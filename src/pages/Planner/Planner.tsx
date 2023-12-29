@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { ReactNode, useCallback } from "react";
 import { CreateRecordDialogProvider, PlannerCalender } from "@/pages";
 import { useStore } from "@/store";
 import { RunRecord } from "@/entity";
 
-export function Planner(): JSX.Element {
+export function Planner(): ReactNode {
   const { records, addRecord, updateRecord, deleteRecord } = useStore();
 
   const onSubmit = useCallback((record: RunRecord) => {

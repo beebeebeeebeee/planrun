@@ -3,6 +3,7 @@ import "./DistanceCalendar.css";
 import Calendar, { TileArgs } from "react-calendar";
 import { Box, Typography } from "@mui/material";
 import { Value } from "react-calendar/dist/cjs/shared/types";
+import { ReactNode } from "react";
 import { DefaultLanguage } from "@/i18n";
 
 export type DistanceCalendarProps = {
@@ -11,7 +12,7 @@ export type DistanceCalendarProps = {
   tileDistance: (date: Date) => number;
 };
 
-export function DistanceCalendar(props: DistanceCalendarProps): JSX.Element {
+export function DistanceCalendar(props: DistanceCalendarProps): ReactNode {
   const { onViewDateChange, viewDate, tileDistance } = props;
 
   return (

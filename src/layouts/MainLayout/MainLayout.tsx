@@ -8,13 +8,14 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslation } from "react-i18next";
+import { ReactNode } from "react";
 import { SideMenuProvider, useSideMenu } from "@/layouts";
 
 export type MainLayoutProps = {
-  children: JSX.Element | JSX.Element[] | boolean | undefined;
+  children: ReactNode;
 };
 
-export function _MainLayout(props: MainLayoutProps): JSX.Element {
+export function _MainLayout(props: MainLayoutProps): ReactNode {
   const { children } = props;
 
   const { t } = useTranslation();
@@ -47,7 +48,7 @@ export function _MainLayout(props: MainLayoutProps): JSX.Element {
   );
 }
 
-export function MainLayout(props: MainLayoutProps): JSX.Element {
+export function MainLayout(props: MainLayoutProps): ReactNode {
   return (
     <SideMenuProvider>
       <_MainLayout {...props} />

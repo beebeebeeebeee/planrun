@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { ReactNode, useCallback, useState } from "react";
 import {
   Button,
   Divider,
@@ -25,7 +25,7 @@ type PlannerCalenderProp = {
   records: RunRecord[];
 };
 
-export function PlannerCalender(props: PlannerCalenderProp): JSX.Element {
+export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
   const { records } = props;
 
   const { t } = useTranslation();
