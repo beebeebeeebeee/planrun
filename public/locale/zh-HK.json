@@ -6,9 +6,8 @@
     "layouts": {
         "main": {
             "title": "PLANRUN",
-            "backup": "備份",
-            "save": "儲存",
-            "restore": "還原"
+            "planner": "計劃",
+            "backup": "備份"
         }
     },
     "pages": {
@@ -25,6 +24,13 @@
                 "remove": "刪除",
                 "save": "儲存"
             }
+        },
+        "backup": {
+            "title": "備份",
+            "count": "共{{count}}筆，{{size}}KB。",
+            "export": "匯出",
+            "restore": "還原",
+            "clear": "清除"
         }
     },
     "unit": {

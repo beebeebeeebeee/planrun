@@ -3,11 +3,11 @@ import "@fontsource/poppins";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Experimental_CssVarsProvider, ThemeProvider } from "@mui/material";
-import { MainLayout } from "@/layouts";
-import { Planner } from "@/pages";
+import { RouterProvider } from "react-router-dom";
 import { registerI18n } from "@/i18n";
 import { createCssTheme, createTheme } from "@/styles";
 import { StoreProvider } from "@/store";
+import { router } from "@/routers";
 
 registerI18n();
 
@@ -19,9 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <Experimental_CssVarsProvider theme={cssTheme}>
         <StoreProvider>
-          <MainLayout>
-            <Planner />
-          </MainLayout>
+          <RouterProvider router={router} />
         </StoreProvider>
       </Experimental_CssVarsProvider>
     </ThemeProvider>

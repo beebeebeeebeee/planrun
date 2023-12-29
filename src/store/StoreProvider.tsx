@@ -18,6 +18,7 @@ export type StoreValue = {
   updateRecord: (id: string, payload: RunRecord) => void;
   exportRecords: () => void;
   importRecords: () => void;
+  clearRecords: () => void;
 };
 
 export const StoreContext = createContext<StoreValue | undefined>(undefined);
@@ -67,6 +68,11 @@ export function StoreProvider({
     setRecords(data);
   }, []);
 
+  const clearRecords = useCallback(() => {
+    store.set([]);
+    setRecords([]);
+  }, []);
+
   useEffect(() => {
     const data = store.get();
     setRecords(data);
@@ -80,6 +86,7 @@ export function StoreProvider({
       updateRecord,
       exportRecords,
       importRecords,
+      clearRecords,
     }),
     [
       records,
@@ -88,6 +95,7 @@ export function StoreProvider({
       updateRecord,
       exportRecords,
       importRecords,
+      clearRecords,
     ]
   );
 

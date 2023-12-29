@@ -9,15 +9,10 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTranslation } from "react-i18next";
 import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 import { SideMenuProvider, useSideMenu } from "@/layouts";
 
-export type MainLayoutProps = {
-  children: ReactNode;
-};
-
-export function _MainLayout(props: MainLayoutProps): ReactNode {
-  const { children } = props;
-
+export function _MainLayout(): ReactNode {
   const { t } = useTranslation();
   const { sideMenu, toggleDrawer } = useSideMenu();
 
@@ -42,16 +37,16 @@ export function _MainLayout(props: MainLayoutProps): ReactNode {
       </AppBar>
       {sideMenu}
       <Container maxWidth="sm" sx={{ py: 1 }}>
-        {children}
+        <Outlet />
       </Container>
     </Box>
   );
 }
 
-export function MainLayout(props: MainLayoutProps): ReactNode {
+export function MainLayout(): ReactNode {
   return (
     <SideMenuProvider>
-      <_MainLayout {...props} />
+      <_MainLayout />
     </SideMenuProvider>
   );
 }

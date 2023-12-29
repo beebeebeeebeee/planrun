@@ -6,9 +6,8 @@
     "layouts": {
         "main": {
             "title": "PLANRUN",
-            "backup": "Backup",
-            "save": "Save",
-            "restore": "Restore"
+            "planner": "Planner",
+            "backup": "Backup"
         }
     },
     "pages": {
@@ -25,6 +24,13 @@
                 "remove": "Remove",
                 "save": "Save"
             }
+        },
+        "backup": {
+            "title": "Backup",
+            "count": "{{count}} records, size {{size}}KB.",
+            "export": "Export",
+            "restore": "Restore",
+            "clear": "Clear"
         }
     },
     "unit": {

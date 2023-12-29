@@ -6,9 +6,10 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  styled,
 } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
-import UploadIcon from "@mui/icons-material/Upload";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import {
   createContext,
   ReactNode,
@@ -18,7 +19,14 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { Link as RouterLink } from "react-router-dom";
 import { useStore } from "@/store";
+import { RouterPath } from "@/constants";
+
+const Link = styled(RouterLink)`
+  color: inherit;
+  text-decoration: none;
+`;
 
 type SideMenuContextValue = {
   sideMenu: ReactNode;
@@ -38,8 +46,6 @@ function SideMenu(props: SideMenuProps): ReactNode {
   const { drawer, toggleDrawer } = props;
 
   const { t } = useTranslation();
-  const { exportRecords, importRecords } = useStore();
-
   return (
     <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
       <Box
@@ -49,25 +55,26 @@ function SideMenu(props: SideMenuProps): ReactNode {
         sx={{ width: "17rem" }}
       >
         <List>
-          <ListItem>
-            <ListItemText primary={t("layouts.main.backup")} />
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={exportRecords}>
-              <ListItemIcon>
-                <DownloadIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("layouts.main.save")} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={importRecords}>
-              <ListItemIcon>
-                <UploadIcon />
-              </ListItemIcon>
-              <ListItemText primary={t("layouts.main.restore")} />
-            </ListItemButton>
-          </ListItem>
+          <Link to={RouterPath.PLANNER}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DateRangeIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("layouts.main.planner")} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to={RouterPath.BACKUP}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CloudDownloadIcon />
+                </ListItemIcon>
+                <ListItemText primary={t("layouts.main.backup")} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         </List>
       </Box>
     </Drawer>
