@@ -107,7 +107,7 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
               >
                 <Typography>
                   {t("unit.distance.k", {
-                    distance: value,
+                    distance: Math.round(value * 10) / 10,
                   })}
                 </Typography>
               </Box>

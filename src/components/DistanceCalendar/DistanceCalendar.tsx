@@ -47,7 +47,9 @@ export function DistanceCalendar(_props: DistanceCalendarProps): ReactNode {
                     color: theme.palette.secondary.contrastText,
                   })}
                 >
-                  {t("unit.distance.k", { distance })}
+                  {t("unit.distance.k", {
+                    distance: Math.round(distance * 10) / 10,
+                  })}
                 </Typography>
               </Box>
             ) : (
