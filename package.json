@@ -24,6 +24,7 @@
     "react-i18next": "^14.0.0",
     "react-material-ui-form-validator": "^3.0.1",
     "react-router-dom": "^6.21.1",
+    "react-sortable-hoc": "^2.0.0",
     "uuid": "^9.0.1",
     "vite-plugin-pwa": "^0.17.4"
   },

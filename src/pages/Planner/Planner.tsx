@@ -18,9 +18,16 @@ export function Planner(): ReactNode {
     deleteRecord(id);
   }, []);
 
+  const updateOrdering = useCallback((newOrdering: RunRecord[]) => {
+    newOrdering.forEach((record) => {
+      deleteRecord(record.id);
+      addRecord(record);
+    });
+  }, []);
+
   return (
     <CreateRecordDialogProvider onSubmit={onSubmit} onRemove={onRemove}>
-      <PlannerCalender records={records} />
+      <PlannerCalender records={records} updateOrdering={updateOrdering} />
     </CreateRecordDialogProvider>
   );
 }
