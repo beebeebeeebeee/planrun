@@ -36,7 +36,8 @@
         },
         "raceSummary": {
             "upcomingRace": "Upcoming Race",
-            "pastRace": "Past Race"
+            "pastRace": "Past Race",
+            "noRecords": "No records"
         },
         "backup": {
             "title": "Backup",

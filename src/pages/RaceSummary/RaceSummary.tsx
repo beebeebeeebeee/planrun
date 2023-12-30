@@ -4,10 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useStore } from "@/store";
 import { RunRecord } from "@/entity";
 
-function CardList({ records }: { records: RunRecord[] }): ReactNode {
-  return records.map((record) => (
+function CardItem({ children }: { children: ReactNode }): ReactNode {
+  return (
     <Card
-      key={record.id}
       sx={{
         borderRadius: 0.5,
       }}
@@ -20,22 +19,31 @@ function CardList({ records }: { records: RunRecord[] }): ReactNode {
           },
         }}
       >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Stack alignItems="flex-start">
-            <Typography>{record.date}</Typography>
-            <Typography>{record.title}</Typography>
-          </Stack>
-          <Stack alignItems="flex-end">
-            <Typography>{record.distance} km</Typography>
-            <Typography>{record.raceTime ?? ""}</Typography>
-          </Stack>
-        </Stack>
+        {children}
       </CardContent>
     </Card>
+  );
+}
+
+function CardList({ records }: { records: RunRecord[] }): ReactNode {
+  const { t } = useTranslation();
+
+  if (records.length === 0)
+    return <CardItem>{t("pages.raceSummary.noRecords")}</CardItem>;
+
+  return records.map((record: RunRecord) => (
+    <CardItem key={record.id}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack alignItems="flex-start">
+          <Typography>{record.date}</Typography>
+          <Typography>{record.title}</Typography>
+        </Stack>
+        <Stack alignItems="flex-end">
+          <Typography>{record.distance} km</Typography>
+          <Typography>{record.raceTime ?? ""}</Typography>
+        </Stack>
+      </Stack>
+    </CardItem>
   ));
 }
 
