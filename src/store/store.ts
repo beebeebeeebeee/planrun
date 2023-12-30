@@ -1,4 +1,4 @@
-import { RunRecord } from "@/entity";
+import { RunRecord, RunRecordConverter } from "@/entity";
 
 const LOCAL_STORAGE_KEY = "RUNNING_RECORDS";
 
@@ -54,8 +54,15 @@ export class Store {
             return;
           }
 
-          const data = JSON.parse(content.toString());
-          this.set(data);
+          const data: unknown = JSON.parse(content.toString());
+
+          this.set(
+            Array.isArray(data)
+              ? (data
+                  .map((record: any) => RunRecordConverter.fromJSON(record))
+                  .filter((record) => record != null) as RunRecord[])
+              : []
+          );
           resolve();
         };
         reader.readAsText(file);
