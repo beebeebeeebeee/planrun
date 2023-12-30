@@ -1,5 +1,6 @@
 import {
   Box,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -10,6 +11,7 @@ import {
 } from "@mui/material";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import {
   createContext,
   ReactNode,
@@ -20,7 +22,47 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
+import { ParseKeys } from "i18next";
 import { RouterPath } from "@/constants";
+
+type MenuListItemProps = {
+  path: string;
+  icon: ReactNode;
+  title: ParseKeys;
+};
+class MenuListItem {
+  path: string;
+
+  icon: ReactNode;
+
+  title: ParseKeys;
+
+  constructor(props: MenuListItemProps) {
+    const { path, icon, title } = props;
+    this.path = path;
+    this.icon = icon;
+    this.title = title;
+  }
+}
+
+const MenuList: (MenuListItem | ReactNode)[] = [
+  new MenuListItem({
+    path: RouterPath.PLANNER,
+    icon: <DateRangeIcon />,
+    title: "layouts.main.planner",
+  }),
+  new MenuListItem({
+    path: RouterPath.RACE_SUMMARY,
+    icon: <SummarizeIcon />,
+    title: "layouts.main.raceSummary",
+  }),
+  <Divider />,
+  new MenuListItem({
+    path: RouterPath.BACKUP,
+    icon: <CloudDownloadIcon />,
+    title: "layouts.main.backup",
+  }),
+];
 
 const Link = styled(RouterLink)`
   color: inherit;
@@ -54,26 +96,20 @@ function SideMenu(props: SideMenuProps): ReactNode {
         sx={{ width: "17rem" }}
       >
         <List>
-          <Link to={RouterPath.PLANNER}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <DateRangeIcon />
-                </ListItemIcon>
-                <ListItemText primary={t("layouts.main.planner")} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to={RouterPath.BACKUP}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CloudDownloadIcon />
-                </ListItemIcon>
-                <ListItemText primary={t("layouts.main.backup")} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          {MenuList.map((item) =>
+            item instanceof MenuListItem ? (
+              <Link to={item.path}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={t(item.title)} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ) : (
+              item
+            )
+          )}
         </List>
       </Box>
     </Drawer>

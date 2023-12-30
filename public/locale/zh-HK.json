@@ -7,7 +7,8 @@
         "main": {
             "title": "PLANRUN",
             "planner": "計劃",
-            "backup": "備份"
+            "backup": "備份",
+            "raceSummary": "比賽摘要"
         }
     },
     "pages": {
@@ -20,6 +21,8 @@
                 "title": "標題",
                 "description": "描述",
                 "distance": "距離 (公里)",
+                "isRace": "比賽",
+                "raceTime": "比賽時間",
                 "cancel": "取消",
                 "remove": "刪除",
                 "save": "儲存",
@@ -30,6 +33,10 @@
                     "remove": "刪除"
                 }
             }
+        },
+        "raceSummary": {
+            "upcomingRace": "即將舉行的比賽",
+            "pastRace": "過去的比賽"
         },
         "backup": {
             "title": "備份",

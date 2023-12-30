@@ -7,7 +7,8 @@
         "main": {
             "title": "PLANRUN",
             "planner": "Planner",
-            "backup": "Backup"
+            "backup": "Backup",
+            "raceSummary": "Race Summary"
         }
     },
     "pages": {
@@ -20,6 +21,8 @@
                 "title": "Title",
                 "description": "Description",
                 "distance": "Distance (km)",
+                "isRace": "Is Race",
+                "raceTime": "Race Time",
                 "cancel": "Cancel",
                 "remove": "Remove",
                 "save": "Save",
@@ -30,6 +33,10 @@
                     "remove": "Remove"
                 }
             }
+        },
+        "raceSummary": {
+            "upcomingRace": "Upcoming Race",
+            "pastRace": "Past Race"
         },
         "backup": {
             "title": "Backup",

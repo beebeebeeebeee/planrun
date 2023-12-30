@@ -11,11 +11,14 @@ type PlannerCalenderProp = {
   records: RunRecord[];
   viewDate: Value;
   onViewDateChange: (date: Value) => void;
-  getDistanceByDate: (date: Date) => number;
+  getInfoByDate: (date: Date) => {
+    distance: number;
+    isRace: boolean;
+  };
 };
 
 export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
-  const { records, viewDate, onViewDateChange, getDistanceByDate } = props;
+  const { records, viewDate, onViewDateChange, getInfoByDate } = props;
 
   const { t } = useTranslation();
 
@@ -50,11 +53,16 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
     [records, viewMonth]
   );
 
-  const tileDistance = useCallback(
+  const tileInfo = useCallback(
     (date: Date) => {
-      return viewMonth !== undefined ? getDistanceByDate(date) : 0;
+      return viewMonth !== undefined
+        ? getInfoByDate(date)
+        : {
+            distance: 0,
+            isRace: false,
+          };
     },
-    [getDistanceByDate, viewMonth]
+    [getInfoByDate, viewMonth]
   );
 
   return (
@@ -63,7 +71,7 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
         <DistanceCalendar
           value={viewDate}
           onChange={onViewDateChange}
-          tileDistance={tileDistance}
+          tileInfo={tileInfo}
           onActiveStartDateChange={onActiveStartDateChange}
         />
         <Grid

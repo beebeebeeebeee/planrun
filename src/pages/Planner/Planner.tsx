@@ -43,9 +43,21 @@ export function Planner(): ReactNode {
     [records]
   );
 
-  const getDistanceByDate = useCallback(
+  const getInfoByDate = useCallback(
     (date: Date) =>
-      getRecordsByDate(date).reduce((pv, cv) => pv + cv.distance, 0),
+      getRecordsByDate(date).reduce<{
+        distance: number;
+        isRace: boolean;
+      }>(
+        (pv, cv) => ({
+          distance: pv.distance + cv.distance,
+          isRace: pv.isRace || (cv.isRace ?? false),
+        }),
+        {
+          distance: 0,
+          isRace: false,
+        }
+      ),
     [getRecordsByDate]
   );
 
@@ -61,7 +73,7 @@ export function Planner(): ReactNode {
           records={records}
           viewDate={viewDate}
           onViewDateChange={onViewDateChange}
-          getDistanceByDate={getDistanceByDate}
+          getInfoByDate={getInfoByDate}
         />
         <PlannerDailyRecords
           records={currentDateRecord}

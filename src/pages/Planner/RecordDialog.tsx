@@ -1,9 +1,11 @@
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControlLabel,
 } from "@mui/material";
 import {
   ChangeEvent,
@@ -53,6 +55,8 @@ const InitForm = (date?: Date) =>
     title: "",
     description: "",
     distance: "" as any,
+    isRace: false,
+    raceTime: "",
   });
 
 export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
@@ -164,6 +168,39 @@ export function RecordDialog(props: CreateRecordDialogProps): ReactNode {
             type="text"
             fullWidth
             variant="standard"
+          />
+          {form.isRace && (
+            <TextValidator
+              name="raceTime"
+              value={form.raceTime}
+              onChange={handleChange}
+              margin="dense"
+              label={t("pages.planner.createDialog.raceTime")}
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          )}
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={form.isRace ?? false}
+                onChange={(_, checked) =>
+                  setForm((record) => {
+                    const r = record.withUpdate({
+                      name: "isRace",
+                      value: checked,
+                    });
+                    if (!checked) {
+                      r.raceTime = "";
+                    }
+                    return r;
+                  })
+                }
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+            label={t("pages.planner.createDialog.isRace")}
           />
         </DialogContent>
         <DialogActions>

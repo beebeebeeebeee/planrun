@@ -8,11 +8,14 @@ import { CalendarProps } from "react-calendar/src/Calendar";
 import { DefaultLanguage } from "@/i18n";
 
 export type DistanceCalendarProps = {
-  tileDistance: (date: Date) => number;
+  tileInfo: (date: Date) => {
+    distance: number;
+    isRace: boolean;
+  };
 } & CalendarProps;
 
 export function DistanceCalendar(_props: DistanceCalendarProps): ReactNode {
-  const { tileDistance, ...props } = _props;
+  const { tileInfo, ...props } = _props;
 
   const { t } = useTranslation();
 
@@ -23,14 +26,16 @@ export function DistanceCalendar(_props: DistanceCalendarProps): ReactNode {
       prev2Label={null}
       next2Label={null}
       tileContent={(tile: TileArgs): JSX.Element | undefined => {
-        const r = tileDistance(tile.date);
+        const { distance, isRace } = tileInfo(tile.date);
 
         return (
           <Box sx={{ verticalAlign: "center", mt: 0.3 }}>
-            {r > 0 ? (
+            {distance > 0 ? (
               <Box
                 sx={(theme) => ({
-                  bgcolor: theme.palette.secondary.main,
+                  bgcolor: isRace
+                    ? theme.palette.warning.main
+                    : theme.palette.secondary.main,
                   borderRadius: "0.25rem",
                   width: "100%",
                   p: "0.2rem",
@@ -42,7 +47,7 @@ export function DistanceCalendar(_props: DistanceCalendarProps): ReactNode {
                     color: theme.palette.secondary.contrastText,
                   })}
                 >
-                  {t("unit.distance.k", { distance: r })}
+                  {t("unit.distance.k", { distance })}
                 </Typography>
               </Box>
             ) : (
