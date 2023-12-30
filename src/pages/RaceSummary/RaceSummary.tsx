@@ -80,7 +80,6 @@ export function RaceSummary(): ReactNode {
       spacing={1}
       sx={{
         textAlign: "center",
-        pt: 2,
       }}
     >
       <Typography variant="h6">
