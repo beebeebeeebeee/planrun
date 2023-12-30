@@ -190,9 +190,6 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
             }`
           )}
         </Typography>
-        <Typography>
-          {t("unit.distance.km", { distance: currentDateDistance })}
-        </Typography>
       </Stack>
 
       {currentDateRecord.length === 0 ? (
