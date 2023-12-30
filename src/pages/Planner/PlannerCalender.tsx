@@ -38,7 +38,6 @@ export function PlannerCalender(props: PlannerCalenderProp): ReactNode {
   const [viewMonth, setViewMonth] = useState<Date | undefined>(new Date());
 
   const onActiveStartDateChange = useCallback((onArgs: OnArgs) => {
-    console.log(onArgs);
     setViewMonth(
       onArgs.view === "month" ? onArgs.activeStartDate ?? undefined : undefined
     );
