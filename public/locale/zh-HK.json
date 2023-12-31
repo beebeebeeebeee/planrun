@@ -37,7 +37,10 @@
         "raceSummary": {
             "upcomingRace": "即將舉行的比賽",
             "pastRace": "過去的比賽",
-            "noRecords": "沒有記錄"
+            "noRecords": "沒有記錄",
+            "daysLeft": "{{days}}天後",
+            "daysAgo": "{{days}}天前",
+            "raceDay": "比賽日"
         },
         "backup": {
             "title": "備份",

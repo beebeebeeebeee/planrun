@@ -37,7 +37,10 @@
         "raceSummary": {
             "upcomingRace": "Upcoming Race",
             "pastRace": "Past Race",
-            "noRecords": "No records"
+            "noRecords": "No records",
+            "daysLeft": "{{days}} days left",
+            "daysAgo": "{{days}} days ago",
+            "raceDay": "Race day"
         },
         "backup": {
             "title": "Backup",

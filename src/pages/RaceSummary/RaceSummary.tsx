@@ -31,20 +31,45 @@ function CardList({ records }: { records: RunRecord[] }): ReactNode {
   if (records.length === 0)
     return <CardItem>{t("pages.raceSummary.noRecords")}</CardItem>;
 
-  return records.map((record: RunRecord) => (
-    <CardItem key={record.id}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Stack alignItems="flex-start">
-          <Typography>{record.date}</Typography>
-          <Typography>{record.title}</Typography>
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+
+  return records.map((record: RunRecord) => {
+    const daysLeft = Math.floor(
+      (new Date(record.date).getTime() - currentDate.getTime()) /
+        (1000 * 3600 * 24)
+    );
+    return (
+      <CardItem key={record.id}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Stack alignItems="flex-start">
+            <Typography
+              sx={(theme) => ({
+                color: theme.palette.grey[600],
+              })}
+            >
+              {/* eslint-disable-next-line no-nested-ternary */}
+              {daysLeft > 0
+                ? t("pages.raceSummary.daysLeft", { days: daysLeft })
+                : daysLeft < 0
+                ? t("pages.raceSummary.daysAgo", { days: -daysLeft })
+                : t("pages.raceSummary.raceDay")}
+            </Typography>
+            <Typography>{record.date}</Typography>
+            <Typography>{record.title}</Typography>
+          </Stack>
+          <Stack alignItems="flex-end">
+            <Typography>{record.distance} km</Typography>
+            <Typography>{record.raceTime ?? ""}</Typography>
+          </Stack>
         </Stack>
-        <Stack alignItems="flex-end">
-          <Typography>{record.distance} km</Typography>
-          <Typography>{record.raceTime ?? ""}</Typography>
-        </Stack>
-      </Stack>
-    </CardItem>
-  ));
+      </CardItem>
+    );
+  });
 }
 
 type RaceRecords = {
