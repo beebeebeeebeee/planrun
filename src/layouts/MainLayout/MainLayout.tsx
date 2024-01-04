@@ -36,7 +36,10 @@ export function _MainLayout(): ReactNode {
         </Toolbar>
       </AppBar>
       {sideMenu}
-      <Container maxWidth="sm" sx={{ py: 1 }}>
+      <Container
+        maxWidth="sm"
+        sx={{ py: 1, pb: "env(safe-area-inset-bottom)" }}
+      >
         <Outlet />
       </Container>
     </Box>
