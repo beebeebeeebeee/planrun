@@ -51,6 +51,8 @@ module.exports = {
     ],
     // disabled unused rules
     'no-useless-concat': 'off',
+    'default-case': 'off',
+    'no-nested-ternary': 'off',
     'no-await-in-loop': 'off',
     'no-param-reassign': 'off',
     'class-methods-use-this': 'off',

@@ -6,8 +6,13 @@
     "layouts": {
         "main": {
             "title": "PLANRUN",
+            "subheader": {
+                "planner": "Planner",
+                "settings": "Settings"
+            },
             "planner": "Planner",
             "backup": "Backup",
+            "pacing": "Pacing Calculator",
             "raceSummary": "Race Summary"
         }
     },
@@ -42,6 +47,13 @@
             "daysAgo": "{{days}} days ago",
             "raceDay": "Race day"
         },
+        "pacing": {
+            "clear": "Clear",
+            "unit": "Unit",
+            "distance": "Distance",
+            "time": "Time",
+            "pace": "Pace"
+        },
         "backup": {
             "title": "Backup",
             "count": "{{count}} records, size {{size}}KB.",
@@ -67,6 +79,14 @@
             "km": "{{distance}} km",
             "k": "{{distance}}k"
         },
+        "distanceFull": {
+            "kilometers": "kilometers",
+            "miles": "miles"
+        },
+        "inDistance": {
+            "kilometers": "in kilometers",
+            "miles": "in miles"
+        },
         "weekday": {
             "0": "Sun",
             "1": "Mon",
@@ -75,6 +95,11 @@
             "4": "Thu",
             "5": "Fri",
             "6": "Sat"
+        },
+        "time": {
+            "hours": "hours",
+            "minutes": "minutes",
+            "seconds": "seconds"
         }
     }
 }

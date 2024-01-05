@@ -1,12 +1,12 @@
 import {
   Box,
-  Divider,
   Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
   styled,
 } from "@mui/material";
 import DateRangeIcon from "@mui/icons-material/DateRange";
@@ -45,7 +45,23 @@ class MenuListItem {
   }
 }
 
-const MenuList: (MenuListItem | ReactNode)[] = [
+type MenuListSubheaderProps = {
+  title: ParseKeys;
+};
+
+class MenuListSubheader {
+  title: ParseKeys;
+
+  constructor(props: MenuListSubheaderProps) {
+    const { title } = props;
+    this.title = title;
+  }
+}
+
+const MenuList: (MenuListItem | MenuListSubheader)[] = [
+  new MenuListSubheader({
+    title: "layouts.main.subheader.planner",
+  }),
   new MenuListItem({
     path: RouterPath.PLANNER,
     icon: <DateRangeIcon />,
@@ -56,7 +72,14 @@ const MenuList: (MenuListItem | ReactNode)[] = [
     icon: <SummarizeIcon />,
     title: "layouts.main.raceSummary",
   }),
-  <Divider />,
+  new MenuListItem({
+    path: RouterPath.PACING,
+    icon: <CloudDownloadIcon />,
+    title: "layouts.main.pacing",
+  }),
+  new MenuListSubheader({
+    title: "layouts.main.subheader.settings",
+  }),
   new MenuListItem({
     path: RouterPath.BACKUP,
     icon: <CloudDownloadIcon />,
@@ -96,9 +119,9 @@ function SideMenu(props: SideMenuProps): ReactNode {
         sx={{ width: "17rem" }}
       >
         <List>
-          {MenuList.map((item) =>
+          {MenuList.map((item, idx) =>
             item instanceof MenuListItem ? (
-              <Link to={item.path}>
+              <Link to={item.path} key={idx}>
                 <ListItem disablePadding>
                   <ListItemButton>
                     <ListItemIcon>{item.icon}</ListItemIcon>
@@ -107,7 +130,7 @@ function SideMenu(props: SideMenuProps): ReactNode {
                 </ListItem>
               </Link>
             ) : (
-              item
+              <ListSubheader key={idx}>{t(item.title)}</ListSubheader>
             )
           )}
         </List>

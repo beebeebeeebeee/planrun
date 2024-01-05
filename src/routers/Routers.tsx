@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterPath } from "@/constants/router";
 import { MainLayout } from "@/layouts";
-import { Planner, Backup } from "@/pages";
+import { Planner, Backup, Pacing } from "@/pages";
 import { RaceSummary } from "@/pages/RaceSummary";
 
 export const router = createBrowserRouter(
@@ -17,6 +17,10 @@ export const router = createBrowserRouter(
         {
           path: RouterPath.RACE_SUMMARY,
           element: <RaceSummary />,
+        },
+        {
+          path: RouterPath.PACING,
+          element: <Pacing />,
         },
         {
           path: RouterPath.BACKUP,

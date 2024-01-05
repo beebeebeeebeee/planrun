@@ -6,8 +6,13 @@
     "layouts": {
         "main": {
             "title": "PLANRUN",
+            "subheader": {
+                "planner": "計劃",
+                "settings": "設定"
+            },
             "planner": "計劃",
             "backup": "備份",
+            "pacing": "配速計算器",
             "raceSummary": "比賽摘要"
         }
     },
@@ -42,6 +47,13 @@
             "daysAgo": "{{days}}天前",
             "raceDay": "比賽日"
         },
+        "pacing": {
+            "clear": "清除",
+            "unit": "單位",
+            "distance": "距離",
+            "time": "時間",
+            "pace": "配速"
+        },
         "backup": {
             "title": "備份",
             "count": "共{{count}}筆，{{size}}KB。",
@@ -67,6 +79,14 @@
             "km": "{{distance}}公里",
             "k": "{{distance}}k"
         },
+        "distanceFull": {
+            "kilometers": "公里",
+            "miles": "英里"
+        },
+        "inDistance": {
+            "kilometers": "公里",
+            "miles": "英里"
+        },
         "weekday": {
             "0": "週日",
             "1": "週一",
@@ -75,6 +95,11 @@
             "4": "週四",
             "5": "週五",
             "6": "週六"
+        },
+        "time": {
+            "hours": "小時",
+            "minutes": "分鐘",
+            "seconds": "秒"
         }
     }
 }
