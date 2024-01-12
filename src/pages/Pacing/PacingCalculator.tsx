@@ -391,7 +391,7 @@ export function PacingCalculator(props: CalculatorProps): JSX.Element {
               value={(payload.distance?.toString() ?? "") as any}
               onChange={(event) => {
                 const { value } = event.target;
-                if (value === "" || value === "0") return;
+                if (Number.isNaN(Number(value))) return;
                 setDistance(Number(value));
               }}
               fullWidth
